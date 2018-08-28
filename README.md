@@ -1,0 +1,44 @@
+# BakaBT Description Generator
+This tool is intended for automated, fast, and most importantly, accurate generation of torrent descriptions for BakaBT tracker.
+
+For now, it's still in very early alpha, but i intend to work on it until it becomes so easy to use that it'll be a nobrainer to go for it instead of manually typing HTML code.
+
+### Usage
+##### Cloning the repo and installing dependencies: 
+
+    git clone https://github.com/w1kl4s/DescriptionGenerator && cd DescriptionGenerator
+    pip3 install -r requirements.txt
+You will need AniDB account. If you don't have one, create it. After that you need to provide your login and password in `src/settings.py` file.
+You can encrypt your connection using AniDB API Client page. If you wish to do so, generate client key and put it in `src/settings.py` as well.
+
+That should be it. You can start using the tool!
+#### Usage, for real this time
+    python3 src/main.py /path/to/directory
+This will create data.txt file in your current directory. Progress of hashing and file query is displayed.
+Speed of hashing depends heavily on read speed of directory (For example, i can hash with about 300 MB/s when directory is on my SSD, but if i try it with location over network, it can be as low as single megabytes per second.)
+
+### Current State
+
+What is working:
+Fetching of most basic data from AniDB
+Writing obtained data to .txt file
+Verification of each file with release information
+### TODO
+Ordered from most to least important:
+
+Acquiring missing data from mediainfo (Framerate, aspect ratio, audio sample rate, channels, subtitle format)
+Generating links for other sites (Anime News Network, AnimePlanet, MAL)
+Fetching pages of director and studio
+Parsing every file data to get average values for whole release (video bitrate, audio bitrate)
+Fetching description either from ANN, AP, or MAL (for user to choose)
+Implementing multithreading for faster hashing and querying rate
+
+### Limitations
+Main limitation right now is AniDB API which does not contain all information that is needed. Also, it doesn't allow fast querying (Wiki says that it allows one request per 4 seconds, which is a lot). I'm using Yumemi Client for easier management of this ([Source Code](https://github.com/fpob/yumemi)).
+
+Right now, it doesn't check for extra files as well (Openings, Endings, etc), since AniDB API doesn't include those in episode number. Hashes of those files are still calculated and they will be fetched just like normal episodes, so having them in checked directory won't interfere with data parsing for main release itself.
+
+## Help!
+
+I am by no means a proper developer. I work as a sysadmin, so i have a lot of experience with Python, but not when it comes to writing a proper project from scratch. It would be great if someone who actually knows how to do that stuff properly came here and complained about it. I am open to suggestions how to improve it and make it a proper pythonic application.
+
