@@ -1,0 +1,4 @@
+src/settings.py
+src/__pycache__
+*.pyc
+*.pytest_cache
