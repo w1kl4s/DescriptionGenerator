@@ -19,22 +19,27 @@ Speed of hashing depends heavily on read speed of directory (For example, i can 
 
 ![Example usage and output](https://i.imgur.com/M6bYfTS.png)
 
-### Current State
+### Current State and TODO
 
-What is working:
-Fetching of most basic data from AniDB
-Writing obtained data to .txt file
-Verification of each file with release information
-### TODO
-Ordered from most to least important:
+Ordered from most to least important: 
 
-Acquiring missing data from mediainfo (Framerate, aspect ratio, audio sample rate, channels, subtitle format)
-Generating links for other sites (Anime News Network, AnimePlanet, MAL)
-Fetching pages of director and studio
-Parsing every file data to get average values for whole release (video bitrate, audio bitrate)
-Fetching description either from ANN, AP, or MAL (for user to choose)
-Implementing multithreading for faster hashing and querying rate
+- [x] Verification of each file with release information
 
+- [x] Fetching of most basic data from AniDB
+
+- [x] Writing obtained data to .txt file
+
+- [ ] Acquiring missing data from mediainfo (Framerate, aspect ratio, audio sample rate, channels, subtitle format)
+
+- [ ] Generating links for other sites (Anime News Network, AnimePlanet, MAL)
+
+- [ ] Fetching pages of director and studio
+
+- [ ] Parsing every file data to get average values for whole release (video bitrate, audio bitrate)
+
+- [ ] Fetching description either from ANN, AP, or MAL (for user to choose)
+
+- [ ] Implementing multithreading for faster hashing and querying rate
 ### Limitations
 Main limitation right now is AniDB API which does not contain all information that is needed. Also, it doesn't allow fast querying (Wiki says that it allows one request per 4 seconds, which is a lot). I'm using Yumemi Client for easier management of this ([Source Code](https://github.com/fpob/yumemi)).
 
