@@ -20,7 +20,7 @@ Speed of hashing depends heavily on read speed of directory (For example, i can 
 ![Example usage and output](https://i.imgur.com/M6bYfTS.png)
 
 ### Current State and TODO
-    Current things to do:
+Current things to do:
 - [x] Using collections instead of filthy dictionaries
 - [ ] Implenment logging
 - [ ] Implement proper exception classes
