@@ -6,5 +6,4 @@ if len(sys.argv) == 1:
 elif len(sys.argv) > 2:
     print("Only one directory at a time is supported! Check if the name of directory is properly formatted.")
 else:
-	main(sys.argv[1])
-	
+    main(sys.argv[1])

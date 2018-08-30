@@ -1,12 +1,39 @@
 import yumemi
 import settings
 import progressbar
+import collections
 
 from releaseparser import release_check
 
 def fetch_anime_data(metadata_list):
     filedata_list = []
-    animedata = {}
+    anime_data = {}
+    file_response_data = collections.namedtuple('file_data', ["file_id",
+                                                     "anime_id",
+                                                     "episode_id",
+                                                     "group_id",
+                                                     "is_deprecated",
+                                                     "crc_hash",
+                                                     "color_depth",
+                                                     "source",
+                                                     "audio_codec",
+                                                     "audio_bitrate",
+                                                     "video_codec",
+                                                     "video_bitrate",
+                                                     "resolution",
+                                                     "file_format",
+                                                     "audio_language",
+                                                     "sub_language"])
+    anime_response_data = collections.namedtuple('anime_data', ["anime_id",
+                                                                                                                "year",
+                                                                                                                "type",
+                                                                                                                "categories",
+                                                                                                                "romaji_name",
+                                                                                                                "english_name",
+                                                                                                                "episode_count",
+                                                                                                                "ANN_id"])
+
+
     client = yumemi.Client()
     client.auth(settings.login, settings.password)
     if settings.key:
@@ -29,28 +56,13 @@ def fetch_anime_data(metadata_list):
         response = client.call('FILE', {'size': file_size,
                                         'ed2k': file_hash,
                                         'fmask': '720A7FC000',
-                                        'amask': 'A2000000',
+                                        'amask': '00000000',
                                         's': 'xxxxxx'})
         if response.code != 220:
             print(response.message)
             return 0,0
 
-        file_data = {"file_id": response.data[0][0],
-                    "anime_id": response.data[0][1],
-                    "episode_id":response.data[0][2],
-                    "group_id": response.data[0][3],
-                    "is_deprecated": response.data[0][4],
-                    "crc_hash": response.data[0][5],
-                    "color_depth": response.data[0][6],
-                    "source": response.data[0][7],
-                    "audio_codec": response.data[0][8],
-                    "audio_bitrate": response.data[0][9],
-                    "video_codec": response.data[0][10],
-                    "video_bitrate": response.data[0][11],
-                    "resolution": response.data[0][12],
-                    "file_format": response.data[0][13],
-                    "audio_language": response.data[0][14],
-                    "sub_language": response.data[0][15]}
+        file_data = file_response_data(*response.data[0])
 
         filedata_list.append(file_data)
 
@@ -58,27 +70,17 @@ def fetch_anime_data(metadata_list):
         print("Release check failed! Either resolution, anime id or group id don't match for all files!")
         return 0,0
 
-    anime_id = response.data[0][1]
-    #animedata = {"episode_count": response.data[0][16],
-    #            "year": response.data[0][17],
-    #            "categories": response.data[0][18]}
+    anime_id = file_data.anime_id
 
     response = client.call("ANIME", {'aid': anime_id, 'amask': 'B2A08000400000', 's': 'xxxxx'})
 
     if response.code != 230:
         print(response.message)
         return 0,0
-    animedata = {"anime_id": response.data[0][0],
-                "year": response.data[0][1],
-                "type": response.data[0][2],
-                "categories": response.data[0][3],
-                "romaji_name": response.data[0][4],
-                "english_name": response.data[0][5],
-                "episode_count": response.data[0][6],
-                "ANN_id": response.data[0][7]}
 
+    anime_data = anime_response_data(*response.data[0])
 
-    if len(metadata_list) < int(animedata['episode_count']):
+    if len(metadata_list) < int(anime_data['episode_count']):
         print("\nVerification failed!\nFile count in directory is lower than number of episodes on AniDB! Maybe your version is missing something?")
         return 0,0
 
@@ -87,4 +89,4 @@ def fetch_anime_data(metadata_list):
         print('Still logged in... Something went wrong!')
         return 0,0
 
-    return filedata_list, animedata
+    return filedata_list, anime_data
