@@ -5,33 +5,36 @@ import collections
 
 from releaseparser import release_check
 
+
+FileResponseData = collections.namedtuple('file_data', [  "file_id",
+                                                            "anime_id",
+                                                            "episode_id",
+                                                            "group_id",
+                                                            "is_deprecated",
+                                                            "crc_hash",
+                                                            "color_depth",
+                                                            "source",
+                                                            "audio_codec",
+                                                            "audio_bitrate",
+                                                            "video_codec",
+                                                            "video_bitrate",
+                                                            "resolution",
+                                                            "file_format",
+                                                            "audio_language",
+                                                            "sub_language"])
+AnimeResponseData = collections.namedtuple('anime_data', ["anime_id",
+                                                            "year",
+                                                            "type",
+                                                            "categories",
+                                                            "romaji_name",
+                                                            "english_name",
+                                                            "episode_count",
+                                                            "ANN_id"])
+
 def fetch_anime_data(metadata_list):
     filedata_list = []
     anime_data = {}
-    file_response_data = collections.namedtuple('file_data', ["file_id",
-                                                     "anime_id",
-                                                     "episode_id",
-                                                     "group_id",
-                                                     "is_deprecated",
-                                                     "crc_hash",
-                                                     "color_depth",
-                                                     "source",
-                                                     "audio_codec",
-                                                     "audio_bitrate",
-                                                     "video_codec",
-                                                     "video_bitrate",
-                                                     "resolution",
-                                                     "file_format",
-                                                     "audio_language",
-                                                     "sub_language"])
-    anime_response_data = collections.namedtuple('anime_data', ["anime_id",
-                                                                                                                "year",
-                                                                                                                "type",
-                                                                                                                "categories",
-                                                                                                                "romaji_name",
-                                                                                                                "english_name",
-                                                                                                                "episode_count",
-                                                                                                                "ANN_id"])
+    
 
 
     client = yumemi.Client()
@@ -62,7 +65,7 @@ def fetch_anime_data(metadata_list):
             print(response.message)
             return 0,0
 
-        file_data = file_response_data(*response.data[0])
+        file_data = FileResponseData(*response.data[0])
 
         filedata_list.append(file_data)
 
@@ -78,7 +81,7 @@ def fetch_anime_data(metadata_list):
         print(response.message)
         return 0,0
 
-    anime_data = anime_response_data(*response.data[0])
+    anime_data = AnimeResponseData(*response.data[0])
 
     if len(metadata_list) < int(anime_data.episode_count):
         print("\nVerification failed!\nFile count in directory is lower than number of episodes on AniDB! Maybe your version is missing something?")
