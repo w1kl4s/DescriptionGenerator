@@ -42,4 +42,3 @@ def main(dir_path):
     if filedata == 0:
         raise SystemExit
     dump_to_file(filedata[0], animedata)
-    

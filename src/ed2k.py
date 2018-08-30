@@ -24,10 +24,9 @@ def generate_hash(filename):
             ed2k_hash += md4(block).digest()
 
             if file_size % ed2k_block == 0:
-                ed2k_hash += md4('').digest()
+                ed2k_hash += md4('').digest
             try:
                 bar.update(currentblock)
-                pass
             except ValueError:
                 bar.finish()
                 #yes this is expected.
