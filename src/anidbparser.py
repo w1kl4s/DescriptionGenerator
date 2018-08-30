@@ -80,7 +80,7 @@ def fetch_anime_data(metadata_list):
 
     anime_data = anime_response_data(*response.data[0])
 
-    if len(metadata_list) < int(anime_data['episode_count']):
+    if len(metadata_list) < int(anime_data.episode_count):
         print("\nVerification failed!\nFile count in directory is lower than number of episodes on AniDB! Maybe your version is missing something?")
         return 0,0
 
