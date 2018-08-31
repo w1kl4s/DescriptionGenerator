@@ -1,5 +1,4 @@
 click==6.7
-pkg-resources==0.0.0
 progressbar2==3.38.0
 pycrypto==2.6.1
 python-utils==2.3.0

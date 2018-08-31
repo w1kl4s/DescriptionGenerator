@@ -1,9 +1,19 @@
-from parser import main
 import sys
+import logging
+from logging.config import fileConfig
+
+from parser import main
+from exceptionhandlers import NoDirectoryProvided, TooManyDirectories
+
+fileConfig('src/logging_config.ini')
+log = logging.getLogger()
+logging.basicConfig(filename='myapp.log', level=logging.INFO)
 
 if len(sys.argv) == 1:
-    print("You need to provide a directory!")
+    log.error("No directory provided.")
+    raise NoDirectoryProvided
 elif len(sys.argv) > 2:
-    print("Only one directory at a time is supported! Check if the name of directory is properly formatted.")
-else:
-    main(sys.argv[1])
+    log.error("Too Many Directories")
+    raise TooManyDirectories
+if __name__ == '__main__':
+    main(sys.argv[1], log)

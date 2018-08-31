@@ -14,6 +14,7 @@ def generate_hash(filename):
     file_size = None
     with open(filename, 'rb') as f:
         file_size = os.fstat(f.fileno()).st_size
+        progressbar.streams.wrap_stderr()
         bar = progressbar.ProgressBar(max_value=file_size)
         currentblock = 0
         while True:
