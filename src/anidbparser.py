@@ -5,6 +5,7 @@ import collections
 
 from releaseparser import release_check
 from exceptionhandlers import AniDBDown, AniDBResponseException, ReleaseCheckException, FileCountError, LogoutError
+from localmediainfo import file_info
 
 FileResponseData = collections.namedtuple('file_data', [  "file_id",
                                                             "anime_id",
@@ -21,7 +22,12 @@ FileResponseData = collections.namedtuple('file_data', [  "file_id",
                                                             "resolution",
                                                             "file_format",
                                                             "audio_language",
-                                                            "sub_language"])
+                                                            "sub_language",
+                                                            "frame_rate",
+                                                            "aspect_ratio",
+                                                            "audio_sample_rate",
+                                                            "audio_channels",
+                                                            "sub_format"])
 AnimeResponseData = collections.namedtuple('anime_data', ["anime_id",
                                                             "year",
                                                             "type",
@@ -31,7 +37,7 @@ AnimeResponseData = collections.namedtuple('anime_data', ["anime_id",
                                                             "episode_count",
                                                             "ANN_id"])
 
-def fetch_anime_data(metadata_list, log):
+def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
     filedata_list = []
     anime_data = {}
 
@@ -40,7 +46,7 @@ def fetch_anime_data(metadata_list, log):
     if settings.key:
         client.encrypt(settings.key, settings.login)
 
-    log.info("\nQuerying hashes to AniDB...")
+    log.info("Querying hashes to AniDB...")
 
     for counter, metadata in enumerate(metadata_list):
         log.info(metadata['filename'] +    " is being processed..." + " (File {} out of {})".format(counter+1, len(metadata_list)))
@@ -62,6 +68,9 @@ def fetch_anime_data(metadata_list, log):
         if response.code != 220:
             log.error("Wrong response! File was not found.")
             raise AniDBResponseException(response.code)
+
+        local_file_data = file_info(file_paths[counter])
+        response.data[0].extend(local_file_data)
 
         file_data = FileResponseData(*response.data[0])
 

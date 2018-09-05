@@ -17,12 +17,17 @@ def dump_to_file(filedata, animedata):
             file.write("Resolution: " + filedata.resolution + '\n')
             file.write("Encoding: " + filedata.video_codec + '\n')
             file.write("Bitrate: " + filedata.video_bitrate + '\n')
+            file.write("Frame Rate: " + filedata.frame_rate + '\n')
+            file.write("Aspect Ratio: " + filedata.aspect_ratio + '\n')
             file.write("Color Depth: " + filedata.color_depth + '\n')
 
             file.write("\nAudio\n\n")
             file.write("Language: " + filedata.audio_language + '\n')
             file.write("Format: " + filedata.audio_codec + '\n')
             file.write("Bitrate: " + filedata.audio_bitrate + '\n')
+            file.write("Sample Rate: " + filedata.audio_sample_rate + '\n')
+            file.write("Channels: " + filedata.audio_channels + '\n')
 
             file.write("\nSubtitles\n\n")
             file.write("Language: " + filedata.sub_language + '\n')
+            file.write("Format: " + filedata.sub_format + '\n')
