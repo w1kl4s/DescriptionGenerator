@@ -17,7 +17,9 @@ That should be it. You can start using the tool!
 This will create data.txt file in your current directory. Progress of hashing and file query is displayed.
 Speed of hashing depends heavily on read speed of directory (For example, i can hash with about 300 MB/s when directory is on my SSD, but if i try it with location over network, it can be as low as single megabytes per second.)
 
-![Example usage and output](https://i.imgur.com/M6bYfTS.png)
+New fancy colored logs and stuff! Previev of what it looks like right now.
+
+![Example usage and output](https://i.imgur.com/wwC3nN2.png)
 
 ### Current State and TODO
 
@@ -37,7 +39,7 @@ Speed of hashing depends heavily on read speed of directory (For example, i can 
 
 - [x] Parsing every file data to get average values for whole release (video bitrate, audio bitrate)
 
-- [ ] Generating links for other sites (Anime News Network, AnimePlanet, MAL)
+- [x] Generating links for other sites (Anime News Network, AnimePlanet, MAL) (Partially done i guess, MAL and AnimePlanet need search instead of just pasting ID from AniDB)
 
 - [ ] Fetching pages of director and studio
 
