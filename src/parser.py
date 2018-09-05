@@ -32,7 +32,6 @@ class HashParser(object):
         for count, file_path in enumerate(self.file_paths):
             log.info("File {} out of {}: ".format(
                 count + 1, len(self.file_paths)) + self.filenames[count])
-            log.info(file_path)
             mediainfo_list.append(file_info(file_path))
             metadata = generate_hash(file_path)
             metadata['filename'] = self.filenames[count]

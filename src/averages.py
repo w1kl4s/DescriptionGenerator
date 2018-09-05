@@ -2,7 +2,7 @@ def plus_variation(average, total_list):
     return (max(total_list) / average - 1) * 100
 
 def minus_variation(average, total_list):
-    return (max(total_list) / average - 1) * 100
+    return (min(total_list) / average - 1) * 100
 
 def average_values(filedata_list, log):
     video_bitrate_list = []

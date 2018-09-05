@@ -1,6 +1,7 @@
 import sys
 import logging
 from logging.config import fileConfig
+import colorlog
 
 from parser import main
 from exceptionhandlers import NoDirectoryProvided, TooManyDirectories
