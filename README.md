@@ -17,7 +17,7 @@ That should be it. You can start using the tool!
 This will create data.txt file in your current directory. Progress of hashing and file query is displayed.
 Speed of hashing depends heavily on read speed of directory (For example, i can hash with about 300 MB/s when directory is on my SSD, but if i try it with location over network, it can be as low as single megabytes per second.)
 
-New fancy colored logs and stuff! Previev of what it looks like right now.
+New fancy colored logs and stuff! Preview of what it looks like right now.
 
 ![Example usage and output](https://i.imgur.com/wwC3nN2.png)
 
