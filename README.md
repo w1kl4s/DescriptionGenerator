@@ -22,10 +22,10 @@ Speed of hashing depends heavily on read speed of directory (For example, i can 
 ### Current State and TODO
 Current things to do:
 - [x] Using collections instead of filthy dictionaries
-- [ ] Implement logging
-- [ ] Implement proper exception classes
 
-Ordered from most to least important: 
+- [x] Implement logging
+
+- [x] Implement proper exception classes
 
 - [x] Verification of each file with release information
 
@@ -33,13 +33,15 @@ Ordered from most to least important:
 
 - [x] Writing obtained data to .txt file
 
-- [ ] Acquiring missing data from mediainfo (Framerate, aspect ratio, audio sample rate, channels, subtitle format)
+- [x] Acquiring missing data from mediainfo (Framerate, aspect ratio, audio sample rate, channels, subtitle format)
+
+- [x] Parsing every file data to get average values for whole release (video bitrate, audio bitrate)
 
 - [ ] Generating links for other sites (Anime News Network, AnimePlanet, MAL)
 
 - [ ] Fetching pages of director and studio
 
-- [ ] Parsing every file data to get average values for whole release (video bitrate, audio bitrate)
+
 
 - [ ] Fetching description either from ANN, AP, or MAL (for user to choose)
 
