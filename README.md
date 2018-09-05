@@ -20,7 +20,7 @@ Speed of hashing depends heavily on read speed of directory (For example, i can 
 ![Example usage and output](https://i.imgur.com/M6bYfTS.png)
 
 ### Current State and TODO
-Current things to do:
+
 - [x] Using collections instead of filthy dictionaries
 
 - [x] Implement logging
@@ -40,8 +40,6 @@ Current things to do:
 - [ ] Generating links for other sites (Anime News Network, AnimePlanet, MAL)
 
 - [ ] Fetching pages of director and studio
-
-
 
 - [ ] Fetching description either from ANN, AP, or MAL (for user to choose)
 
