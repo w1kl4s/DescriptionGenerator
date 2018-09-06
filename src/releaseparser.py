@@ -1,9 +1,11 @@
-def release_check(filedata_list):
+def release_check(filedata_list, log):
         data = filedata_list
 
         animeid_list = []
         groupid_list = []
         resolution_list = []
+
+        log.debug("Release Check successful.")
 
         for filedata in data:
                 animeid_list.append(filedata.anime_id)

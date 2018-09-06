@@ -69,14 +69,21 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
             log.error("Wrong response! File was not found.")
             raise AniDBResponseException(response.code)
 
-        local_file_data = file_info(file_paths[counter])
+        local_file_data = file_info(file_paths[counter], log)
         response.data[0].extend(local_file_data)
 
         file_data = FileResponseData(*response.data[0])
 
+        if file_data.is_deprecated != "0":
+            log.warning("File seems to be deprecated! is_depracated field from AniDB is {}!".format(file_data.is_deprecated))
+
+        log.debug("file id: {}, video bitrate: {}, audio bitrate: {}, is deprecated: {}".format(file_data.file_id,
+                                                                                                file_data.video_bitrate,
+                                                                                                file_data.audio_bitrate,
+                                                                                                file_data.is_deprecated))
         filedata_list.append(file_data)
 
-    if not release_check(filedata_list):
+    if not release_check(filedata_list, log):
         log.error("Release check failed.")
         raise ReleaseCheckException
 

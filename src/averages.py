@@ -20,7 +20,10 @@ def average_values(filedata_list, log):
     log.info("Average Audio bitrate calculated. Audio bitrate variation: +{:0.2f}% and {:1.2f}%".format(
                                                                                                         plus_variation(average_audio_bitrate, audio_bitrate_list),
                                                                                                         minus_variation(average_audio_bitrate, audio_bitrate_list)))
-
+    log.debug("Video bitrate list: {}".format(video_bitrate_list))
+    log.debug("Average video bitrate: {}".format(average_video_bitrate))
+    log.debug("Audio bitrate list: {}".format(audio_bitrate_list))
+    log.debug("Average audio bitrate: {}".format(average_audio_bitrate))
     filedata = filedata_list[0]
     filedata._replace(video_bitrate = average_video_bitrate)
     filedata._replace(video_bitrate = average_video_bitrate)

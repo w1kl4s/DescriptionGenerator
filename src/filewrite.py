@@ -1,4 +1,4 @@
-def dump_to_file(filedata, animedata):
+def dump_to_file(filedata, animedata, log):
     with open("data.txt", 'w') as file:
             file.write("Show information\n\n")
             file.write("Year: " + animedata.year + '\n')
@@ -31,3 +31,4 @@ def dump_to_file(filedata, animedata):
             file.write("\nSubtitles\n\n")
             file.write("Language: " + filedata.sub_language + '\n')
             file.write("Format: " + filedata.sub_format + '\n')
+    log.debug("File written.")

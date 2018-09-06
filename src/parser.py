@@ -31,9 +31,10 @@ class HashParser(object):
 
         for count, file_path in enumerate(self.file_paths):
             log.info("File {} out of {}: ".format(
-                count + 1, len(self.file_paths)) + self.filenames[count])
-            mediainfo_list.append(file_info(file_path))
-            metadata = generate_hash(file_path)
+                                                count + 1,
+                                                len(self.file_paths)) + self.filenames[count])
+            mediainfo_list.append(file_info(file_path, log))
+            metadata = generate_hash(file_path, log)
             metadata['filename'] = self.filenames[count]
             metadata_list.append(metadata)
         return metadata_list, mediainfo_list, self.file_paths
@@ -51,7 +52,7 @@ def main(dir_path, log):
         filedata_list, animedata = fetch_anime_data(metadata_list, mediainfo_list,file_paths ,log)
 
         filedata = average_values(filedata_list, log)
-        dump_to_file(filedata, animedata)
+        dump_to_file(filedata, animedata, log)
 
     except KeyboardInterrupt:
         log.error("Program Interrupted.")

@@ -8,8 +8,6 @@ from exceptionhandlers import NoDirectoryProvided, TooManyDirectories
 
 fileConfig('src/logging_config.ini')
 log = logging.getLogger()
-logging.basicConfig(filename='myapp.log', level=logging.INFO)
-
 if len(sys.argv) == 1:
     log.error("No directory provided.")
     raise NoDirectoryProvided
