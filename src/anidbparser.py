@@ -2,6 +2,8 @@ import yumemi
 import settings
 import progressbar
 import collections
+from jikanpy import Jikan
+
 
 from releaseparser import release_check
 from exceptionhandlers import AniDBDown, AniDBResponseException, ReleaseCheckException, FileCountError, LogoutError
@@ -35,11 +37,13 @@ AnimeResponseData = collections.namedtuple('anime_data', ["anime_id",
                                                             "romaji_name",
                                                             "english_name",
                                                             "episode_count",
-                                                            "ANN_id"])
+                                                            "ANN_id",
+                                                            "MAL_id"])
 
 def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
     filedata_list = []
     anime_data = {}
+    jikan = Jikan()
 
     client = yumemi.Client()
     client.auth(settings.login, settings.password)
@@ -69,8 +73,7 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
             log.error("Wrong response! File was not found.")
             raise AniDBResponseException(response.code)
 
-        local_file_data = file_info(file_paths[counter], log)
-        response.data[0].extend(local_file_data)
+        response.data[0].extend(mediainfo_list[counter])
 
         file_data = FileResponseData(*response.data[0])
 
@@ -89,12 +92,17 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
 
     anime_id = file_data.anime_id
 
+
+
     response = client.call("ANIME", {'aid': anime_id, 'amask': 'B2A08000400000', 's': 'xxxxx'})
 
     if response.code != 230:
         log.error("Wrong response! Anime was not found")
         raise AniDBResponseException(response.code)
 
+    mal_search_result = jikan.search('anime', response.data[0][5])['results'][0]['mal_id']
+
+    response.data[0].append(mal_search_result)
     anime_data = AnimeResponseData(*response.data[0])
 
     if len(metadata_list) < int(anime_data.episode_count):
@@ -106,4 +114,8 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
         log.error("Logout failed")
         raise LogoutError
 
+    for filedata in filedata_list:
+        if filedata.sub_format == "Not Found.":
+            log.warning("One or more files has missing subtitle format information! Check log for detailed information.")
+            break
     return filedata_list, anime_data

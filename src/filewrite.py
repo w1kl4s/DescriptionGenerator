@@ -6,6 +6,7 @@ def dump_to_file(filedata, animedata, log):
             file.write("Categories: " + animedata.categories + '\n')
             file.write("ANN Link: " + "https://www.animenewsnetwork.com/encyclopedia/anime.php?id={}".format(animedata.ANN_id) + '\n')
             file.write("AniDB Link: " + "https://anidb.net/perl-bin/animedb.pl?show=anime&aid={}".format(animedata.anime_id) + '\n')
+            file.write("MAL Link: " + "https://myanimelist.net/anime/{}".format(animedata.MAL_id) + '\n')
 
             file.write("\nFile Information\n\n")
             file.write("Group link: http://anidb.net/perl-bin/animedb.pl?show=group&gid={}\n".format(filedata.group_id))

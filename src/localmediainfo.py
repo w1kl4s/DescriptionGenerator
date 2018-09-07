@@ -11,7 +11,10 @@ def get_media_info(index, key, media_info, log):
     try:
         return media_info['tracks'][index][key]
     except IndexError:
-        log.warning("{} field was not found!".format(key))
+        if key == "format":
+            log.debug("File has missing subtitle format.")
+        else:
+            log.warning("{} field was not found in mediainfo!".format(key))
         return "Not Found."
 
 def file_info(file_path, log):
