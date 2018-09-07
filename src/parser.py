@@ -1,6 +1,6 @@
 import sys
 import os
-from datetime import datetime
+import datetime
 import json
 
 from ed2k import generate_hash
@@ -23,29 +23,44 @@ class HashParser(object):
                 paths.append(os.path.join(root, filename))
                 filenames_list.append(filename)
         return paths, filenames_list
+    def sum_time(self, execution_time_list):
+        time_sum = datetime.timedelta()
+        for i in execution_time_list:
+            i = str(i)
+            (h, m, s) = i.split(':')
+            d = datetime.timedelta(hours=float(h), minutes=float(m), seconds=float(s))
+            time_sum += d
+        return time_sum.total_seconds()
 
     def parse_directory(self, log):
         mediainfo_list = []
         metadata_list = []
         metadata = {}
+        execution_time_list = []
 
         for count, file_path in enumerate(self.file_paths):
             log.info("File {} out of {}: ".format(
                                                 count + 1,
                                                 len(self.file_paths)) + self.filenames[count])
             mediainfo_list.append(file_info(file_path, log))
+
+            start_time = datetime.datetime.now()
             metadata = generate_hash(file_path, log)
+            execution_time_list.append(datetime.datetime.now() - start_time)
+            log.debug("Hashing time: {}".format(datetime.datetime.now() - start_time))
+
             metadata['filename'] = self.filenames[count]
             metadata_list.append(metadata)
-        return metadata_list, mediainfo_list, self.file_paths
 
+        execution_time = self.sum_time(execution_time_list)
+        log.debug("Total hashing time: {}".format(execution_time))
+
+        return metadata_list, mediainfo_list, self.file_paths, execution_time
 
 def main(dir_path, log):
     try:
         parser = HashParser(dir_path)
-        start_time = datetime.now()
-        metadata_list, mediainfo_list, file_paths = parser.parse_directory(log)
-        execution_time = (datetime.now() - start_time).total_seconds()
+        metadata_list, mediainfo_list, file_paths, execution_time = parser.parse_directory(log)
         for i in metadata_list:
             total_speed = (i['size'] / (1024 * 1014)) / execution_time
         log.info("Total hashing speed: {0:.2f} MB/sec".format(total_speed))

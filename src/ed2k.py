@@ -16,10 +16,16 @@ def generate_hash(filename, log):
     with open(filename, 'rb') as f:
         file_size = os.fstat(f.fileno()).st_size
         bar = 0
-        if  type(log.handlers[0]) == logging.StreamHandler:
-            progressbar.streams.wrap_stderr()
-            bar = progressbar.ProgressBar(max_value=file_size)
         currentblock = 0
+        prefixes=('', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
+        if  type(log.handlers[0]) == logging.StreamHandler:
+            widgets = [ progressbar.Percentage(), " | ",
+                        progressbar.DataSize(prefixes = prefixes),"/",
+                        progressbar.DataSize(variable="max_value", prefixes = prefixes), " | ",
+                        progressbar.Bar(marker="#",left="[",right="]"),
+                        progressbar.ETA()]
+            progressbar.streams.wrap_stderr()
+            bar = progressbar.ProgressBar(max_value=file_size, widgets = widgets)
         while True:
             block = f.read(ed2k_block)
             currentblock += sys.getsizeof(block)

@@ -2,6 +2,8 @@ import yumemi
 import settings
 import progressbar
 import collections
+import requests
+import xmltodict
 from jikanpy import Jikan
 
 
@@ -38,7 +40,21 @@ AnimeResponseData = collections.namedtuple('anime_data', ["anime_id",
                                                             "english_name",
                                                             "episode_count",
                                                             "ANN_id",
-                                                            "MAL_id"])
+                                                            "MAL_id",
+                                                            "director_id",
+                                                            "studio_id_list"])
+def get_creator_info(anime_id):
+    r = requests.get("http://api.anidb.net:9001/httpapi?request=anime&client=descgen&clientver=1&protover=1&aid={}".format(anime_id))
+
+    anime_data = xmltodict.parse(r.content)
+
+    studio_id_list = []
+    for creator in anime_data['anime']['creators']['name']:
+        if "direction" in creator['@type'].lower():
+            director_id = creator['@id']
+        if creator['@type'].lower() == "work" or creator['@type'].lower() == "animation work":
+            studio_id_list.append(creator['@id'])
+    return director_id, studio_id_list
 
 def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
     filedata_list = []
@@ -102,7 +118,12 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
 
     mal_search_result = jikan.search('anime', response.data[0][5])['results'][0]['mal_id']
 
+    director_id, studio_id_list = get_creator_info(response.data[0][0])
+
     response.data[0].append(mal_search_result)
+    response.data[0].append(director_id)
+    response.data[0].append(studio_id_list)
+
     anime_data = AnimeResponseData(*response.data[0])
 
     if len(metadata_list) < int(anime_data.episode_count):
