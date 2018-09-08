@@ -36,3 +36,8 @@ class LogoutError(Exception):
         self.message = "Logout Failed! Maybe network connection changed during runtime?"
     def __str__(self):
         return self.message
+class HTTPApiError(Exception):
+    def __init__(self):
+        self.message = "HTTP Api returned wrong response! Either file information is really fucked, or client got banned! Try again in few hours."
+    def __str__(self):
+        return self.message

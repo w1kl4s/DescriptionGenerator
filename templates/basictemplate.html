@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title> Template </title>
+<style type="text/css" media="screen">
+/* main */
+*{{
+    padding: 0px;
+    margin: 0px;
+}}
+*:focus{{
+    outline: none;
+}}
+body{{
+    background: #fff;
+    font-family: tahoma;
+    font-size: 8pt;
+    color: #fff;
+    height: [Insert]px;
+    width: 940px;
+    background-repeat: no-repeat;
+}}
+body{{
+    background: #000000; /* It's for visibility of data. After putting backgroud url, image will overlap it. */
+    background-image: url("BACKGROUND_IMAGE_URL");
+    background-size:cover;
+}}
+a:link,a:visited,a:active,a:hover{{
+    text-decoration: underline;
+    color: #fff;
+}}
+h1{{
+    padding: 5px;
+    text-align: center;
+    font-size: 11pt;
+}}
+
+/* text bars */
+.bars{{
+    width: 230px;
+    margin: 0px 20px 0px 20px;
+}}
+#centered{{
+    /* width: 580px; */
+    margin: 0px auto;
+}}
+#bar1{{
+    float: right;
+}}
+#bar2{{
+    float: right;
+}}
+.bg{{
+    background-image: url([bbtimg=668]);
+}}
+.low{{
+    height: 100px;
+    background-image: url([bbtimg=2881]);
+}}
+
+/* inside the text bars */
+.content{{
+    padding: 10px;
+    line-height: 12pt;
+    text-shadow: 1px 1px 2px #000;
+    text-align: justify;
+}}
+.item{{
+    margin: 3px 0px 3px 0px;
+}}
+.itemDivider{{
+    text-align: center;
+    font-size: 9pt;
+    margin: 3px 0px 3px 0px;
+}}
+
+/* right bar specific */
+#show{{
+    margin-bottom: 15px;
+}}
+</style>
+</head>
+<body>
+
+<div id="centered">
+    <div id="bar1" class="bars">
+        <div class="bg">
+            <div class="content">
+                <div id="show">
+                    <h1>
+                        Show Information
+                    </h1>
+                    <div class="item">
+                        <b>Year: </b> {year}
+                    </div>
+                    <div class="item">
+                        <b>Runtime: </b> {episode_count}
+                    </div>
+                    <div class="item">
+                        <b>Categories: </b> {categories}
+                    </div>
+                    <div class="item">
+                        <b>Director: </b> {director_link}
+                    </div>
+                    <div class="item">
+                        <b>Production: </b> {studio_links}
+                    </div>
+                    <div class="item">
+                        <b>More:</b>
+                        <a target="_blank" title="Anime News Network" href="https://www.animenewsnetwork.com/encyclopedia/anime.php?id={ANN_id}">ANN</a>,
+                        <a target="_blank" title="AniDB" href="http://anidb.net/perl-bin/animedb.pl?show=anime&aid={anime_id}">AniDB</a>,
+                        <a target="_blank" title="MyAnimeList" href="https://myanimelist.net/anime/{MAL_id}">MAL</a>
+                    </div>
+                </div>
+                <div id="file">
+                    <h1>
+                        File Information
+                    </h1>
+
+
+                    <div class="itemDivider">
+                        <b>Release information</b>
+                    </div>
+
+                    <div class="item">
+                        <b>Group: </b> <a href="http://anidb.net/perl-bin/animedb.pl?show=group&gid={group_id}">{group_name}</a>
+                    </div>
+                    <div class="item">
+                        <b>Source: </b> {source}
+                    </div>
+                    <div class="item">
+                        <b>Format: </b> {file_format}
+                    </div>
+                    <div class="item">
+                        <b>Release link: </b> <a href="http://anidb.net/perl-bin/animedb.pl?show=group&gid={group_id}&aid={anime_id}">AniDB source</a>
+                    </div>
+
+
+
+
+                    <div class="itemDivider">
+                        <b>Video</b>
+                    </div>
+
+
+                    
+                    <div class="item">
+                        <b>Resolution: </b> {resolution}
+                    </div>
+                    <div class="item">
+                        <b>Encoding: </b> {video_codec}
+                    </div>
+                    <div class="item">
+                        <b>Framerate: </b>{frame_rate} FPS
+                    </div>
+                    <div class="item">
+                        <b>Bitrate: </b>{video_bitrate} kbps
+                    </div>
+                    <div class="item">
+                        <b>Color depth: </b> {color_depth}
+                    </div>
+                    <div class="item">
+                        <b>Aspect ratio: </b> {aspect_ratio}
+                    </div>
+
+
+                    <div class="itemDivider">
+                        <b>Audio</b>
+                    </div>
+
+
+                    <div class="item">
+                        <b>Language: </b> {audio_language}
+                    </div>
+                    <div class="item">
+                        <b>Channels: </b> {audio_channels}
+                    </div>
+                    <div class="item">
+                        <b>Format: </b> {audio_codec}
+                    </div>
+                    <div class="item">
+                        <b>Sample rate: </b> {audio_sample_rate}
+                    </div>
+                    <div class="item">
+                        <b>Bitrate: </b> {audio_bitrate} kbps
+                    </div>
+
+
+                    <div class="itemDivider">
+                        <b>Subtitles</b>
+                    </div>
+                    <div class="item">
+                        <b>Language: </b> {sub_language}
+                    </div>
+                    <div class="item">
+                        <b>Format: </b> {sub_format}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="low"></div>
+    </div>
+    <div id="bar2" class="bars">
+        <div class="bg">
+            <div class="content">
+                <h1>
+                    {english_name}
+                </h1>
+                <div class="item">
+                <!-- DESCRIPTION GOES HERE --!><br>
+                Source: <!-- DESCRIPTION SOURCE GOES HERE --><br><br>
+                <a target="_blank" title="Related" href="https://bakabt.me/browse.php?q={english_name}">Related torrents on BakaBT</a>
+
+                
+                </div>
+            </div>
+        </div>
+        <div class="low"></div>
+    </div>
+</div>
+</body>
+</html>
+[screenshot]
+<!-- SCREENSHOTS GO HERE -->
+[/screenshot]

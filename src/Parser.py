@@ -3,11 +3,11 @@ import os
 import datetime
 import json
 
-from ed2k import generate_hash
-from anidbparser import fetch_anime_data
-from filewrite import dump_to_file
-from localmediainfo import file_info
-from averages import average_values
+from src import Ed2k
+from src import AnidbParser
+from src import FileWrite
+from src import LocalMediaInfo
+from src import Averages
 
 class HashParser(object):
 
@@ -42,18 +42,18 @@ class HashParser(object):
             log.info("File {} out of {}: ".format(
                                                 count + 1,
                                                 len(self.file_paths)) + self.filenames[count])
-            mediainfo_list.append(file_info(file_path, log))
+            mediainfo_list.append(LocalMediaInfo.file_info(file_path, log))
 
             start_time = datetime.datetime.now()
-            metadata = generate_hash(file_path, log)
+            metadata = Ed2k.generate_hash(file_path, log)
             execution_time_list.append(datetime.datetime.now() - start_time)
-            log.debug("Hashing time: {}".format(datetime.datetime.now() - start_time))
+            log.debug("Hashing time: {0:.2f} seconds.".format((datetime.datetime.now() - start_time).total_seconds()))
 
             metadata['filename'] = self.filenames[count]
             metadata_list.append(metadata)
 
         execution_time = self.sum_time(execution_time_list)
-        log.debug("Total hashing time: {}".format(execution_time))
+        log.debug("Total hashing time: {0:.2f} seconds.".format(execution_time))
 
         return metadata_list, mediainfo_list, self.file_paths, execution_time
 
@@ -64,10 +64,10 @@ def main(dir_path, log):
         for i in metadata_list:
             total_speed = (i['size'] / (1024 * 1014)) / execution_time
         log.info("Total hashing speed: {0:.2f} MB/sec".format(total_speed))
-        filedata_list, animedata = fetch_anime_data(metadata_list, mediainfo_list,file_paths ,log)
+        filedata_list, animedata = AnidbParser.fetch_anime_data(metadata_list, mediainfo_list,file_paths ,log)
 
-        filedata = average_values(filedata_list, log)
-        dump_to_file(filedata, animedata, log)
+        filedata = Averages.average_values(filedata_list, log)
+        FileWrite.dump_to_file(filedata, animedata, log)
 
     except KeyboardInterrupt:
         log.error("Program Interrupted.")
