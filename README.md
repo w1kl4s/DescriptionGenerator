@@ -19,7 +19,10 @@ Speed of hashing depends heavily on read speed of directory (For example, i can 
 
 New fancy colored logs and stuff! Preview of what it looks like right now.
 
-![Example usage and output](https://i.imgur.com/wwC3nN2.png)
+Current version already runs well! It takes file in templates folder, and puts parsed data in new HTML file in Generated Descriptions folder.
+
+Mind that i put black background in HTML file for sake of visibility after generation. After you put proper background image, it will go away.
+![Example output:](https://i.imgur.com/1cUl74F.png)
 
 ### Current State and TODO
 
@@ -33,7 +36,7 @@ New fancy colored logs and stuff! Preview of what it looks like right now.
 
 - [x] Fetching of most basic data from AniDB
 
-- [x] Writing obtained data to .txt file
+- [x] Writing obtained data to HTML template
 
 - [x] Acquiring missing data from mediainfo (Framerate, aspect ratio, audio sample rate, channels, subtitle format)
 
@@ -41,7 +44,7 @@ New fancy colored logs and stuff! Preview of what it looks like right now.
 
 - [x] Generating links for other sites (Anime News Network, AnimePlanet, MAL) (Partially done i guess, MAL and AnimePlanet need search instead of just pasting ID from AniDB)
 
-- [ ] Fetching pages of director and studio
+- [x] Fetching pages of director and studio
 
 - [ ] Fetching description either from ANN, AP, or MAL (for user to choose)
 
