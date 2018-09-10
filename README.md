@@ -14,12 +14,10 @@ You can encrypt your connection using AniDB API Client page. If you wish to do s
 That should be it. You can start using the tool!
 #### Usage, for real this time
     python3 main.py /path/to/directory
-This will create data.txt file in your current directory. Progress of hashing and file query is displayed.
+This will create HTML description file in Generated Descriptions folder, according to `basictemplate.html` file in templates folder. Progress of hashing and file query is displayed.
 Speed of hashing depends heavily on read speed of directory (For example, i can hash with about 300 MB/s when directory is on my SSD, but if i try it with location over network, it can be as low as single megabytes per second.)
 
 New fancy colored logs and stuff! Preview of what it looks like right now.
-
-Current version already runs well! It takes file in templates folder, and puts parsed data in new HTML file in Generated Descriptions folder.
 
 Mind that i put black background in HTML file for sake of visibility after generation. After you put proper background image, it will go away.
 ![Example output:](https://i.imgur.com/1cUl74F.png)
@@ -52,7 +50,18 @@ Mind that i put black background in HTML file for sake of visibility after gener
 ### Limitations
 Main limitation right now is AniDB API which does not contain all information that is needed. Also, it doesn't allow fast querying (Wiki says that it allows one request per 4 seconds, which is a lot). I'm using Yumemi Client for easier management of this ([Source Code](https://github.com/fpob/yumemi)).
 
+NO FREAKIN' IDEA HOW IT WORKS ON WINDOWS.
+I use mainly Ubuntu and Arch as my daily drivers. I have absolutely no idea how it will work on Windows, but it should be fine because Python magic i assume?  Anyway, Windows testers are really appriciated. I am screaming for help.
+
 Right now, it doesn't check for extra files as well (Openings, Endings, etc), since AniDB API doesn't include those in episode number. Hashes of those files are still calculated and they will be fetched just like normal episodes, so having them in checked directory won't interfere with data parsing for main release itself.
+
+Fetching proper MAL page is also tricky because of all the OVAs, extra movie and stuff like that with same title. I'll try to make it more accurate using show type field, but even then i'm not sure how well it will work.
+
+Sadly, fetching data like sub creator is very hard since it's not consistent (on AniDB, it sometimes is in notes of release, but it's rare and not really helpful since it's just a string with group name. Additional search would be required, which would require a lot of work and wouldn't even be useful 99% of the time.)
+
+AnimePlanet would also need some kind of scraper to properly parse since i didn't find any API reference for it. However it's very low on my list, beause let's be honest, who even uses AnimePlanet. 
+
+
 
 ## Help!
 
