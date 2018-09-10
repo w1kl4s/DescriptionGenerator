@@ -16,12 +16,12 @@ except ModuleNotFoundError:
         file.write('key = ""\n')
     import settings
 
-if len(sys.argv) == 1:
+if not settings.login or not settings.password:
+    raise ExceptionHandlers.SettingsEmptyError
+elif len(sys.argv) == 1:
     raise ExceptionHandlers.NoDirectoryProvided
 elif len(sys.argv) > 2:
     raise ExceptionHandlers.TooManyDirectories
-elif not settings.login or not settings.password:
-    raise ExceptionHandlers.SettingsEmptyError
 if __name__ == '__main__':
     path = sys.argv[1]
     folder_name = os.path.basename(os.path.dirname(path))
