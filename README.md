@@ -8,12 +8,12 @@ For now, it's still in very early alpha, but i intend to work on it until it bec
 
     git clone https://github.com/w1kl4s/DescriptionGenerator && cd DescriptionGenerator
     pip3 install -r requirements.txt
-You will need AniDB account. If you don't have one, create it. After that you need to provide your login and password in `src/settings.py` file.
-You can encrypt your connection using AniDB API Client page. If you wish to do so, generate client key and put it in `src/settings.py` as well.
+You will need AniDB account. If you don't have one, create it. After that you need to provide your login and password in `https://github.com/w1kl4s/DescriptionGeneratorsettings.py` file.
+You can encrypt your connection using AniDB API Client page. If you wish to do so, generate client key and put it in `settings.py` as well.
 
 That should be it. You can start using the tool!
 #### Usage, for real this time
-    python3 src/main.py /path/to/directory
+    python3 main.py /path/to/directory
 This will create data.txt file in your current directory. Progress of hashing and file query is displayed.
 Speed of hashing depends heavily on read speed of directory (For example, i can hash with about 300 MB/s when directory is on my SSD, but if i try it with location over network, it can be as low as single megabytes per second.)
 
