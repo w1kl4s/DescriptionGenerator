@@ -41,3 +41,8 @@ class HTTPApiError(Exception):
         self.message = "HTTP Api returned wrong response! Either file information is really fucked, or client got banned! Try again in few hours."
     def __str__(self):
         return self.message
+class SettingsEmptyError(Exception):
+    def __init__(self):
+        self.message = "Settings file was empty. This is expected on first run. Fill settings.py file with AniDB credetials and try again."
+    def __str__(self):
+        return self.message

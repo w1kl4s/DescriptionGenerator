@@ -1,3 +1,0 @@
-login = ""
-password = ""
-key = ""
