@@ -25,6 +25,8 @@ elif len(sys.argv) > 2:
 if __name__ == '__main__':
     path = sys.argv[1]
     folder_name = os.path.basename(os.path.dirname(path))
+    folder_name = folder_name.replace("\'","")
+    folder_name = folder_name.replace("\"","")
     fileConfig('logging_config.ini', defaults={ 'logfilename' : "logs/{}.log".format(folder_name) } )
     log = logging.getLogger()
     Parser.main(path, log)
