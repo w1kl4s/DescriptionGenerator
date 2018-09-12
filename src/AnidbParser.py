@@ -1,5 +1,4 @@
 import yumemi
-import settings
 import progressbar
 import collections
 import requests
@@ -86,6 +85,12 @@ def get_creator_info(anime_id, log):
     return director_data, studio_data_list
 
 def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
+    try:
+        import settings
+    except ModuleNotFoundError:
+        log.error("Settings file not found! Something has gone terribly wrong!")
+        raise SettingsVanishedError
+
     filedata_list = []
     anime_data = {}
     jikan = Jikan()

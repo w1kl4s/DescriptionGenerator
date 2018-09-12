@@ -46,3 +46,8 @@ class SettingsEmptyError(Exception):
         self.message = "Settings file was empty. This is expected on first run. Fill settings.py file with AniDB credetials and try again."
     def __str__(self):
         return self.message
+class SettingsVanishedError(Exception):
+    def __init__(self):
+        self.message = "Settings file was not found, but it was present earlier! Did it get deleted? Something has definitely gone wrong."
+    def __str__(self):
+        return self.message
