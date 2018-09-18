@@ -24,6 +24,8 @@ Mind that i put black background in HTML file for sake of visibility after gener
 
 ### Current State and TODO
 
+- [ ] Adding GUI and windows release for our not so tech-savvy friends.
+
 - [x] Using collections instead of filthy dictionaries
 
 - [x] Implement logging
