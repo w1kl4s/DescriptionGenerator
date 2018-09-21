@@ -10,7 +10,6 @@ idna-ssl==1.1.0
 git+git://github.com/AWConant/jikanpy@d37fe884f9def7ef8cc3df145cda51d3a5894ed4
 multidict==4.4.0
 progressbar2==3.38.0
-pycrypto==2.6.1
 pymediainfo==2.3.0
 python-utils==2.3.0
 requests==2.19.1
