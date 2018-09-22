@@ -3,18 +3,30 @@ This tool is intended for automated, fast, and most importantly, accurate genera
 
 For now, it's still in very early alpha, but i intend to work on it until it becomes so easy to use that it'll be a nobrainer to go for it instead of manually typing HTML code.
 
-### Usage
+### Usage and installation
+#### Linux:
 ##### Cloning the repo and installing dependencies: 
-
     git clone https://github.com/w1kl4s/DescriptionGenerator && cd DescriptionGenerator
     pip3 install -r requirements.txt
-You will need AniDB account. If you don't have one, create it. After that you need to provide your login and password in `https://github.com/w1kl4s/DescriptionGeneratorsettings.py` file.
-You can encrypt your connection using AniDB API Client page. If you wish to do so, generate client key and put it in `settings.py` as well.
+#### Windows:
+Install Python 3 (tested on version 3.7) from https://www.python.org/downloads/windows/ and Git https://github.com/git-for-windows/git/releases/tag/v2.19.0.windows.1 . After installing that, go to your desired application directory, and open up CMD/PowerShell there using shift + right click, and choose "Open Powershell/Command Line here" or something like that. In terminal, execute those commands:
+    
+     git clone https://github.com/w1kl4s/DescriptionGenerator
+     cd  DescriptionGenerator
+     py -m pip install -r requirements.txt
 
-That should be it. You can start using the tool!
-#### Usage, for real this time
-    python3 main.py /path/to/directory
+After installation is complete, you can close up your terminal.
+
+#### Usage:
+Start up `main.py` file, either using `python3 main.py` (Linux and Mac), or `py main.py` (Windows).
+Windows also allows to execute py files, so double clicking on `main.py` file should do as well.
+
+You will be prompted with window to enter your AniDB credentials. This is necessary, as AniDB requires authentification in or order to use their API. Entering Client Key is optional, as it's used to encrypt your connection.
+
+After that, another window will open. Choose the folder with anime files you wish to parse, and you are done!
+
 This will create HTML description file in Generated Descriptions folder, according to `basictemplate.html` file in templates folder. Progress of hashing and file query is displayed.
+
 Speed of hashing depends heavily on read speed of directory (For example, i can hash with about 300 MB/s when directory is on my SSD, but if i try it with location over network, it can be as low as single megabytes per second.)
 
 New fancy colored logs and stuff! Preview of what it looks like right now.
