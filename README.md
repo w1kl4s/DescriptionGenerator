@@ -3,7 +3,7 @@ This tool is intended for automated, fast, and most importantly, accurate genera
 
 For now, it's still in very early alpha, but i intend to work on it until it becomes so easy to use that it'll be a nobrainer to go for it instead of manually typing HTML code.
 
-### Usage and installation
+### Usage, installation and updates
 #### Linux:
 ##### Cloning the repo and installing dependencies: 
     git clone https://github.com/w1kl4s/DescriptionGenerator && cd DescriptionGenerator
@@ -16,6 +16,10 @@ Install Python 3 (tested on version 3.7) from https://www.python.org/downloads/w
      py -m pip install -r requirements.txt
 
 After installation is complete, you can close up your terminal.
+
+#### Updating:
+Just like you run requirements install , open terminal in directory with program, and type:
+    git pull
 
 #### Usage:
 Start up `main.py` file, either using `python3 main.py` (Linux and Mac), or `py main.py` (Windows).
