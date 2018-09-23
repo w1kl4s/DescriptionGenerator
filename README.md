@@ -9,7 +9,7 @@ For now, it's still in very early alpha, but i intend to work on it until it bec
     git clone https://github.com/w1kl4s/DescriptionGenerator && cd DescriptionGenerator
     pip3 install -r requirements.txt
 #### Windows:
-Install Python 3 (tested on version 3.7) from https://www.python.org/downloads/windows/ and Git https://github.com/git-for-windows/git/releases/tag/v2.19.0.windows.1 . After installing that, go to your desired application directory, and open up CMD/PowerShell there using shift + right click, and choose "Open Powershell/Command Line here" or something like that. In terminal, execute those commands:
+Install Python 3 (tested on version 3.7) from https://www.python.org/downloads/windows/ (recommended is web-based Windows x86-64 installer) and Git https://github.com/git-for-windows/git/releases/tag/v2.19.0.windows.1 (recommended is Git-2.19.0-64-bit.exe file). Those may be diffrent if you run 32 bit system (which should be pretty rare these days), and i tested the program using those versions. After installing that, go to your desired application directory, and open up CMD/PowerShell there using shift + right click, and choose "Open Powershell/Command Line here" or something like that. In terminal, execute those commands:
     
      git clone https://github.com/w1kl4s/DescriptionGenerator
      cd  DescriptionGenerator
