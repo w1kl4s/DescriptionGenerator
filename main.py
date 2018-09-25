@@ -25,9 +25,16 @@ elif len(sys.argv) == 1:
 else:
     path = sys.argv[1]
 if __name__ == '__main__':
-    folder_name = os.path.basename(os.path.dirname(path))
-    folder_name = folder_name.replace("\'","")
-    folder_name = folder_name.replace("\"","")
-    fileConfig('logging_config.ini', defaults={ 'logfilename' : "logs/{}.log".format(folder_name) } )
-    log = logging.getLogger()
-    Parser.main(path, log)
+    
+    try:
+        folder_name = os.path.basename(os.path.dirname(path))
+        folder_name = folder_name.replace("\'","")
+        folder_name = folder_name.replace("\"","")
+        fileConfig('logging_config.ini', defaults={ 'logfilename' : "logs/{}.log".format(folder_name) } )
+        log = logging.getLogger()
+        Parser.main(path, log)
+    except Exception:
+        import traceback
+        print(traceback.format_exc())
+        print("Press Enter to continue ..." )
+        input() 
