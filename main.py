@@ -25,7 +25,6 @@ elif len(sys.argv) == 1:
 else:
     path = sys.argv[1]
 if __name__ == '__main__':
-    
     try:
         folder_name = os.path.basename(os.path.dirname(path))
         folder_name = folder_name.replace("\'","")
