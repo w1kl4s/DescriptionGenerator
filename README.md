@@ -37,6 +37,37 @@ New fancy colored logs and stuff! Preview of what it looks like right now.
 Mind that i put black background in HTML file for sake of visibility after generation. After you put proper background image, it will go away.
 ![Example output:](https://i.imgur.com/1cUl74F.png)
 
+
+If you wish to use your own template, you can do it pretty easily! If you are here, i imagine you know at least basic principles of HTML. You can swap out `basictemplate.html` in `templates` folder to your own template, just keep the name `basictemplate.html`. In order to make fields properly appear, you will have to replace all curly bracelets in your file with double ones(replace `{` with `{{` and `}` with `}}`). After that, you can put fields in your file. You can look for them in my template, but i'll include it here as well:
+
+    {episode_count}
+    {categories}
+    {director_link}
+    {studio_links}
+    {ANN_id}
+    {anime_id}
+    {MAL_id}
+    {group_id}
+    {group_name}
+    {source}
+    {file_format}
+    {resolution}
+    {video_codec}
+    {frame_rate}
+    {video_bitrate}
+    {color_depth}
+    {aspect_ratio}
+    {audio_language}
+    {audio_channels}
+    {audio_codec}
+    {audio_sample_rate}
+    {audio_bitrate}
+    {sub_language}
+    {sub_format}
+    {english_name}
+    
+Field names should be easily understood. Just put those in your HTML file, and you are good to go! Brackets around field names are important tho. Don't forget them!
+
 ### Current State and TODO
 
 - [ ] Adding GUI and windows release for our not so tech-savvy friends.
