@@ -34,6 +34,7 @@ if __name__ == '__main__':
         Parser.main(path, log)
     except Exception:
         import traceback
-        print(traceback.format_exc())
+        log.debug(traceback.format_exc())
+        print("Something gone wrong! Check {}.log file for more information.".format(folder_name))
         print("Press Enter to continue ..." )
-        input() 
+        input()

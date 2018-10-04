@@ -130,12 +130,19 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
         if file_data.is_deprecated != "0":
             log.warning("File seems to be deprecated! is_depracated field from AniDB is {}!".format(file_data.is_deprecated))
 
-        log.debug("file id: {}, video bitrate: {}, audio bitrate: {}, is deprecated: {}".format(file_data.file_id,
-                                                                                                file_data.video_bitrate,
-                                                                                                file_data.audio_bitrate,
-                                                                                                file_data.is_deprecated))
-        filedata_list.append(file_data)
+        # Small workaround for files with multiple audio tracks. Makes it easier to parse those later.
 
+        file_data = file_data._replace(audio_language = file_data.audio_language.split('\''))
+        file_data = file_data._replace(audio_bitrate = file_data.audio_bitrate.split('\''))
+
+        log.debug("file id: {}, video bitrate: {}"
+                     ", audio bitrate: {}, audio language: {}"
+                     ",is deprecated: {}".format(file_data.file_id,
+                                                    file_data.video_bitrate,
+                                                    file_data.audio_bitrate,
+                                                    file_data.audio_language,
+                                                    file_data.is_deprecated))
+        filedata_list.append(file_data)
     if not ReleaseParser.release_check(filedata_list, log):
         log.error("Release check failed.")
         raise ExceptionHandlers.ReleaseCheckException

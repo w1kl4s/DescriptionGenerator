@@ -5,6 +5,7 @@ def dump_to_file(filedata, animedata, log):
     with open(dir_path + "/../templates/basictemplate.html", 'r') as file:
         template = file.read()
     with open(dir_path + "/../Generated Descriptions/" + animedata.english_name + ".html", 'w') as file:
+        log.debug("{}".format(animedata))
         file.write(template.format( year = animedata.year,
                                     episode_count = animedata.episode_count,
                                     categories = animedata.categories,
