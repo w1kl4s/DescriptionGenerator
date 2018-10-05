@@ -38,8 +38,11 @@ def parse_tracks(filedata_list, log):
         audio_bitrate_string = audio_bitrate_string[:-2]
     else:
         audio_bitrate_string = str(average_audio_bitrate[0]) + " kbps"
+        audio_languages = [filedata.audio_language[0]]
 
     languages = ', '.join(str(x) for x in audio_languages)
+
+    log.debug("{} ::: {}".format(audio_languages, languages))
 
     return video_bitrate_string, audio_bitrate_string, languages, audio_languages
 
@@ -52,8 +55,11 @@ def average_values(filedata_list, log):
 
     audio_codecs = filedata.audio_codec.split('\'')
     audio_codecs_string = ""
-    for i in range(0,len(audio_codecs)):
-        audio_codecs_string += "{}: {}, ".format(languages_list[i], audio_codecs[i])
+    if len(audio_codecs) > 1:
+        for i in range(0,len(audio_codecs)):
+            audio_codecs_string += "{}: {}, ".format(languages_list[i], audio_codecs[i])
+    else:
+        audio_codecs_string = audio_codecs[0]
     audio_codecs_string = audio_codecs_string[:-2]
     filedata = filedata._replace(audio_codec = audio_codecs_string)
     log.debug("{}".format(filedata))
