@@ -146,6 +146,8 @@ def fetch_anime_data(metadata_list, mediainfo_list, file_paths,log):
     if not ReleaseParser.release_check(filedata_list, log):
         log.error("Release check failed.")
         raise ExceptionHandlers.ReleaseCheckException
+    else:
+        log.info("Release check successful.")
 
     anime_id = file_data.anime_id
 

@@ -10,7 +10,7 @@ media_keys = [
 def get_media_info(index, key, media_info, log):
     try:
         return media_info['tracks'][index][key]
-    except IndexError:
+    except (IndexError, KeyError):
         if key == "format":
             log.debug("File has missing subtitle format.")
         else:
