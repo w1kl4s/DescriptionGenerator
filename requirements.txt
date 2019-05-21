@@ -10,7 +10,7 @@ easygui==0.98.1
 future==0.16.0
 idna==2.7
 idna-ssl==1.1.0
-git+git://github.com/AWConant/jikanpy@d37fe884f9def7ef8cc3df145cda51d3a5894ed4 
+jikanpy==2.0.0
 macholib==1.11
 multidict==4.4.0
 pefile==2018.8.8
@@ -18,9 +18,9 @@ progressbar2==3.38.0
 pycryptodome==3.6.6
 pymediainfo==2.3.0
 python-utils==2.3.0
-requests==2.19.1
+requests==2.22.0
 six==1.11.0
-urllib3==1.23
+urllib3==1.25.2
 xmltodict==0.11.0
 yarl==1.2.6
 yumemi==0.2.4
